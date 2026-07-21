@@ -1,0 +1,57 @@
+User uploads PDF
+        │
+        ▼
+PDFLoaderService
+        │
+        ▼
+documents
+        │
+        ▼
+TextSplitterService
+        │
+        ▼
+chunks
+        │
+        ▼
+VectorStoreService
+        │
+        ▼
+Chroma
+        │
+        ▼
+RetrieverService
+        │
+        ▼
+list[Document]
+        │
+        ▼
+QuestionGeneratorService
+        │
+        ▼
+Gemini
+        │
+        ▼
+Interview Questions
+
+
+
+Once we've confirmed the end-to-end flow, we'll improve the prompt to support options like:
+
+Number of questions.
+Difficulty (Beginner, Intermediate, Advanced).
+Question type (Theory, Coding, MCQ, Scenario-based).
+Include or exclude answers.
+Restrict answers to the uploaded document.
+
+There's no need to add those features before the basic pipeline is working.
+
+At this point, the core services are essentially complete:
+
+✅ PDFLoaderService
+✅ TextSplitterService
+✅ EmbeddingService
+✅ VectorStoreService
+✅ RetrieverService
+✅ QuestionGeneratorService
+
+The next step is to wire these services together in a FastAPI endpoint so you can upload a PDF, index it, and then generate interview questions from it. That's where the individual services become a working application.

@@ -1,0 +1,32 @@
+backend/
+│
+├── app.py                  # Flask entry point
+├── config.py               # Configuration and environment loading
+├── requirements.txt
+├── .env
+├── .gitignore
+│
+├── api/
+│   ├── upload.py
+│   └── interview.py
+│
+├── services/
+│   ├── pdf_loader.py
+│   ├── splitter.py
+│   ├── embeddings.py
+│   ├── vectorstore.py
+│   ├── retriever.py
+│   ├── llm.py
+│   └── question_generator.py
+│
+├── prompts/
+│   └── interview_prompt.py
+│
+├── uploads/
+│
+├── chroma_db/
+│
+└── experiments/
+    ├── test_loader.ipynb
+    ├── test_embeddings.ipynb
+    └── test_retriever.ipynb
