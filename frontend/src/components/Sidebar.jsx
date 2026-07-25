@@ -1,13 +1,6 @@
 import { FileText, Image as ImageIcon, FileCode, Paperclip, FolderOpen, X, Trash2, ShieldCheck } from 'lucide-react';
 
-/**
- * Sidebar drawer – shows all files the user has uploaded in this session.
- * Props:
- *   isOpen        – boolean
- *   uploadedFiles – array of { id, name, type, size, uploadedAt }
- *   onRemove      – (id) => void
- *   onClose       – () => void
- */
+
 
 const FILE_ICONS = {
   pdf:   { Icon: FileText,   color: 'text-red-400',   bg: 'bg-red-500/10',   border: 'border-red-500/20' },
@@ -45,7 +38,7 @@ export default function Sidebar({ isOpen, uploadedFiles = [], onRemove, onClose 
 
       {/* Drawer panel */}
       <aside
-        className={`fixed top-0 left-0 h-full z-40 w-72 flex flex-col glass border-r border-white/[0.07] shadow-2xl shadow-black/50
+        className={`fixed top-0 left-0 h-full z-40 w-72 flex flex-col glass border-r  border-white/[0.07] shadow-2xl shadow-black/50
           ${isOpen ? 'sidebar-visible' : 'sidebar-hidden'}`}
       >
         {/* Drawer header */}
