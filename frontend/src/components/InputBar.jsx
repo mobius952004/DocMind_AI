@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback } from 'react';
-import { Paperclip, Send, X, Loader2 } from 'lucide-react';
+import { Paperclip, Send, X, Loader2,MenuSquare } from 'lucide-react';
 
 /**
  * InputBar – sticky bottom bar with text input + file upload.
@@ -16,6 +16,7 @@ export default function InputBar({ onSend, onFilesAdded, disabled = false }) {
   const [pendingFiles, setPendingFiles] = useState([]); // Array of File objects
   const [dragOver, setDragOver] = useState(false);
   const [sendAnim, setSendAnim] = useState(false);
+   const [isOpen, setIsOpen] = useState(false);
   const fileInputRef = useRef(null);
   const textareaRef = useRef(null);
 

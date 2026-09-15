@@ -34,6 +34,13 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 
+from app.api.auth import router as auth_router
+
+app.include_router(
+    auth_router,
+    prefix="/auth",
+    tags=["Auth"]
+)
 app.include_router(
     upload_router,
     prefix="/upload",

@@ -3,13 +3,17 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import PromptTemplate
 
     
+import os
+
 class QuestionGeneratorService:
 
     def __init__(self):
-          self.llm=ChatGoogleGenerativeAI(
-                model="gemini-3.5-flash",
-                temperature=0
-             )
+        if os.getenv("GROQ_API_KEY"):
+            from langchain_groq import ChatGroq
+            self.llm = ChatGroq(model="groq/compound", temperature=0)
+        else:
+            from langchain_google_genai import ChatGoogleGenerativeAI
+            self.llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0)
 
 
 

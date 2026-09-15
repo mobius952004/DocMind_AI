@@ -38,12 +38,12 @@ function UserMessage({ message }) {
             ))}
           </div>
         )}
-        <div className="px-4 py-3 rounded-2xl rounded-br-sm bg-gradient-to-br from-indigo-600 to-purple-700 text-sm text-white shadow-lg shadow-indigo-900/40 leading-relaxed whitespace-pre-wrap">
-          {message.text}
+        <div className="px-4 py-3 rounded-2xl rounded-br-sm bg-gradient-to-br from-emerald-600 to-teal-700 text-sm text-white shadow-lg shadow-emerald-900/40 leading-relaxed whitespace-pre-wrap">
+          {message.content || message.text}
         </div>
       </div>
       {/* Avatar */}
-      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shrink-0 mt-1 shadow-md shadow-indigo-500/30">
+      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white shrink-0 mt-1 shadow-md shadow-emerald-500/30">
         <User className="w-4 h-4" />
       </div>
     </div>
@@ -54,7 +54,7 @@ function AssistantMessage({ message }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(message.text);
+    navigator.clipboard.writeText(message.content || message.text || '');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -62,21 +62,21 @@ function AssistantMessage({ message }) {
   return (
     <div className="flex gap-3 message-animate group">
       {/* AI avatar */}
-      <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white shrink-0 mt-1 shadow-md shadow-indigo-500/30">
+      <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500 via-teal-500 to-green-600 flex items-center justify-center text-white shrink-0 mt-1 shadow-md shadow-emerald-500/30">
         <Bot className="w-4 h-4" />
       </div>
       <div className="max-w-[80%] flex flex-col gap-1">
-        <div className="px-4 py-3 rounded-2xl rounded-bl-sm glass text-sm text-slate-200 leading-relaxed shadow-lg whitespace-pre-wrap relative group/msg">
-          {message.text}
+        <div className="px-4 py-3 rounded-2xl rounded-bl-sm glass text-sm text-zinc-100 leading-relaxed shadow-lg whitespace-pre-wrap relative group/msg">
+          {message.content || message.text}
           <button
             onClick={handleCopy}
-            className="absolute top-2 right-2 p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-slate-400 hover:text-slate-200 opacity-0 group-hover/msg:opacity-100 transition-all duration-150 cursor-pointer"
+            className="absolute top-2 right-2 p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-zinc-400 hover:text-zinc-200 opacity-0 group-hover/msg:opacity-100 transition-all duration-150 cursor-pointer"
             title="Copy to clipboard"
           >
             {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
           </button>
         </div>
-        <p className="text-[10px] text-slate-600 ml-1">DocMind AI · just now</p>
+        <p className="text-[10px] text-zinc-500 ml-1">DocMind AI · just now</p>
       </div>
     </div>
   );

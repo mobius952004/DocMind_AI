@@ -1,12 +1,6 @@
-import { Menu, X, Sparkles, User } from 'lucide-react';
+import { Menu, X, Sparkles, User, LogOut } from 'lucide-react';
 
-/**
- * Header component with logo, title, and sidebar toggle button.
- * Props:
- *   onToggleSidebar – called when the menu icon is clicked
- *   sidebarOpen     – boolean, whether sidebar is currently open
- */
-export default function Header({ onToggleSidebar, sidebarOpen }) {
+export default function Header({ onToggleSidebar, sidebarOpen, user, onLogout }) {
   return (
     <header className="glass flex items-center justify-between px-5 py-3 z-30 border-b border-white/[0.06] shrink-0">
       {/* Left – sidebar toggle + brand */}
@@ -25,28 +19,35 @@ export default function Header({ onToggleSidebar, sidebarOpen }) {
         </button>
 
         {/* Logo mark */}
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 via-teal-500 to-green-600 flex items-center justify-center shadow-lg shadow-emerald-500/30">
           <Sparkles className="w-4 h-4 text-white" />
         </div>
 
         <div className="flex flex-col leading-tight">
-          <span className="font-semibold text-sm gradient-text">DocMind AI</span>
-          <span className="text-[10px] text-slate-500">RAG-powered document assistant</span>
+          <span className="font-semibold text-sm text-emerald-400">DocMind AI</span>
+          <span className="text-[10px] text-zinc-400">Multi-Agent Interview Assistant</span>
         </div>
       </div>
 
-      {/* Right – status pill */}
-      <div className="flex items-center gap-2">
-        <span className="hidden sm:flex items-center gap-1.5 text-xs text-slate-400 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          Ready
-        </span>
-        <button
-          className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/30 cursor-pointer"
-          aria-label="User profile"
-        >
-          <User className="w-4 h-4" />
-        </button>
+      {/* Right – user badge + logout */}
+      <div className="flex items-center gap-3">
+        {user && (
+          <div className="flex items-center gap-2 text-xs text-zinc-300 bg-zinc-900 border border-emerald-500/20 px-3 py-1.5 rounded-full">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="font-medium text-emerald-300">{user.username}</span>
+          </div>
+        )}
+
+        {onLogout && (
+          <button
+            onClick={onLogout}
+            title="Sign Out"
+            className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-red-400 hover:bg-red-500/10 px-3 py-1.5 rounded-xl border border-zinc-800 transition-all cursor-pointer"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Logout</span>
+          </button>
+        )}
       </div>
     </header>
   );
