@@ -85,7 +85,7 @@ function AssistantMessage({ message }) {
 function TypingIndicator() {
   return (
     <div className="flex gap-3 message-animate">
-      <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white shrink-0 shadow-md shadow-indigo-500/30">
+      <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-green-500 via-green-500 to-black-500 flex items-center justify-center text-white shrink-0 shadow-md shadow-indigo-500/30">
         <Bot className="w-4 h-4 animate-bounce" />
       </div>
       <div className="px-4 py-3.5 rounded-2xl rounded-bl-sm glass flex items-center gap-1.5 shadow-lg">
@@ -116,7 +116,7 @@ export default function ChatArea({ messages = [], isLoading = false, onPromptCli
           <div className="flex flex-col items-center justify-center min-h-[60vh] gap-8">
             {/* Hero */}
             <div className="text-center space-y-3">
-              <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-2xl shadow-indigo-500/40">
+              <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-green-500 via-greene-500 to-balck-200 flex items-center justify-center shadow-2xl shadow-green-500/40">
                 <Sparkles className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold gradient-text">DocMind AI</h1>
@@ -135,8 +135,8 @@ export default function ChatArea({ messages = [], isLoading = false, onPromptCli
                     onClick={() => onPromptClick?.(p.label)}
                     className="text-left p-4 rounded-2xl glass border border-white/[0.07] hover:border-indigo-500/30 hover:bg-indigo-500/5 transition-all duration-200 group cursor-pointer"
                   >
-                    <IconComp className="w-6 h-6 text-indigo-400 group-hover:scale-110 transition-transform" />
-                    <p className="mt-2 text-sm font-medium text-slate-200 group-hover:text-indigo-300 transition-colors">{p.label}</p>
+                    <IconComp className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform" />
+                    <p className="mt-2 text-sm font-medium text-slate-200 group-hover:text-green-300 transition-colors">{p.label}</p>
                     <p className="mt-0.5 text-xs text-slate-600">{p.sub}</p>
                   </button>
                 );

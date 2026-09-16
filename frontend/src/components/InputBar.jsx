@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback } from 'react';
-import { Paperclip, Send, X, Loader2,MenuSquare } from 'lucide-react';
+import { Paperclip, Send, X, Loader2 } from 'lucide-react';
 
 /**
  * InputBar – sticky bottom bar with text input + file upload.
@@ -16,7 +16,7 @@ export default function InputBar({ onSend, onFilesAdded, disabled = false }) {
   const [pendingFiles, setPendingFiles] = useState([]); // Array of File objects
   const [dragOver, setDragOver] = useState(false);
   const [sendAnim, setSendAnim] = useState(false);
-   const [isOpen, setIsOpen] = useState(false);
+  //  const [isOpen, setIsOpen] = useState(false);
   const fileInputRef = useRef(null);
   const textareaRef = useRef(null);
 
@@ -92,11 +92,11 @@ export default function InputBar({ onSend, onFilesAdded, disabled = false }) {
           <div className="flex flex-wrap gap-2 mb-2 px-1">
             {pendingFiles.map((f, i) => (
               <div key={i} className="file-chip">
-                <Paperclip className="w-3.5 h-3.5 text-indigo-400" />
+                <Paperclip className="w-3.5 h-3.5 text-green-400" />
                 <span className="truncate max-w-[120px]">{f.name}</span>
                 <button
                   onClick={() => removePending(i)}
-                  className="ml-1 text-indigo-400 hover:text-white transition-colors cursor-pointer"
+                  className="ml-1 text-green-400 hover:text-white transition-colors cursor-pointer"
                   aria-label="Remove file"
                 >
                   <X className="w-3 h-3" />
@@ -109,14 +109,14 @@ export default function InputBar({ onSend, onFilesAdded, disabled = false }) {
         {/* ── Main input container ── */}
         <div
           className={`glass rounded-2xl border transition-all duration-200 input-glow relative
-            ${dragOver ? 'border-indigo-500/60 bg-indigo-500/5' : 'border-white/[0.09]'}`}
+            ${dragOver ? 'border-green-500/60 bg-green-500/40' : 'border-white/[0.09]'}`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
           {dragOver && (
-            <div className="absolute inset-0 flex items-center justify-center rounded-2xl pointer-events-none z-10 bg-indigo-950/40 backdrop-blur-xs">
-              <p className="text-sm text-indigo-300 font-medium">Drop files here</p>
+            <div className="absolute inset-0 flex items-center justify-center rounded-2xl pointer-events-none z-10 bg-green-950/40 backdrop-blur-xs">
+              <p className="text-sm text-green-300 font-medium">Drop files here</p>
             </div>
           )}
 
@@ -151,7 +151,7 @@ export default function InputBar({ onSend, onFilesAdded, disabled = false }) {
                 id="attach-file-btn"
                 onClick={() => fileInputRef.current?.click()}
                 disabled={disabled}
-                className="flex items-center gap-1.5 text-slate-400 hover:text-indigo-300 transition-colors duration-200 text-xs py-1.5 px-2.5 rounded-xl hover:bg-white/5 disabled:opacity-40 cursor-pointer"
+                className="flex items-center gap-1.5 text-slate-400 hover:text-green-300 transition-colors duration-200 text-xs py-1.5 px-2.5 rounded-xl hover:bg-white/5 disabled:opacity-40 cursor-pointer"
                 title="Attach files (PDF, images, docs)"
               >
                 <Paperclip className="w-4 h-4" />
@@ -171,7 +171,7 @@ export default function InputBar({ onSend, onFilesAdded, disabled = false }) {
                 disabled={!canSend}
                 className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 cursor-pointer
                   ${canSend
-                    ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/40 hover:shadow-indigo-500/60 hover:scale-105 active:scale-95'
+                    ? 'bg-gradient-to-br from-green-500 to-green-800 text-white shadow-lg shadow-indigo-500/40 hover:shadow-indigo-500/60 hover:scale-105 active:scale-95'
                     : 'bg-white/5 text-slate-600 cursor-not-allowed'
                   } ${sendAnim ? 'send-pop' : ''}`}
                 aria-label="Send message"
