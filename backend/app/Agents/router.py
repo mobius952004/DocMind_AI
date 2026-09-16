@@ -149,7 +149,10 @@ def synthesize_results(state: RouterState) -> dict:
 - Highlight the most relevant and actionable information
 - Note any discrepancies between sources
 - Keep the response concise and well-organized
-- Make the Respinse , Ui Froendly and easy to Understand also if the question is related to the concept then also explain the concept in brief and in a way that interviewer can ask follow up questions"""
+- Avoid excessive markdown tables.
+- Use short paragraphs.
+- Highlight key terms with bold text.
+- Make the Response , Ui Friendly and easy to Understand also if the question is related to the concept then also explain the concept in brief and in a way that interviewer can ask follow up questions"""
         },
         {"role": "user", "content": "\n\n".join(formatted)}
     ])

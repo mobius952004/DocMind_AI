@@ -40,7 +40,6 @@ export async function fetchAIResponse(query) {
     }
 
     const data = await res.json();
-    console.log(data)
     return data.result || data.message || 'No response generated.';
   } catch (err) {
     console.warn('Backend unavailable, using simulated response:', err);
