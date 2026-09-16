@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar';
 import ChatArea from '../components/ChatArea';
 import InputBar from '../components/InputBar';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE } from '../api';
 
 export default function ChatPage() {
   const { user, sessionId, logout } = useAuth();
@@ -37,7 +38,7 @@ export default function ChatPage() {
             const formData = new FormData();
             formData.append('file', fileObj);
             try {
-              await fetch('http://localhost:8000/upload/', {
+              await fetch(`${API_BASE}/upload/`, {
                 method: 'POST',
                 body: formData,
               });
@@ -65,7 +66,7 @@ export default function ChatPage() {
 
       try {
         // Post prompt + session_id to backend for thread-based memory management
-        const response = await fetch('http://localhost:8000/interview/generate', {
+        const response = await fetch(`${API_BASE}/interview/generate`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
