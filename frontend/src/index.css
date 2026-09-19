@@ -125,3 +125,62 @@ body {
 .send-pop {
   animation: send-pop 0.15s ease;
 }
+
+.button{
+  display:inline-block;
+  background-color:rgb(27, 55, 27);
+  text-align: center;
+  font-size: smaller;
+   padding: 4px 10px;
+  border-radius: 9999px;
+  
+  
+
+
+}
+.button:hover{
+  background-color: #2b6126;
+}
+
+
+/* markdown */
+.markdown-body {
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+.markdown-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+.markdown-body th,
+.markdown-body td {
+  border: 1px solid #d0d7de;
+  padding: 6px 13px;
+}
+.markdown-body th {
+  background: #f6f8fa;
+  text-align: left;
+}
+.markdown-body blockquote {
+  border-left: 4px solid #d0d7de;
+  margin: 0;
+  padding-left: 1rem;
+  color: #57606a;
+}
+.markdown-body pre {
+  background: #1e1e2e;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+.markdown-body code {
+  background: rgba(110, 118, 129, 0.15);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.markdown-body pre code {
+  background: none;
+  padding: 0;
+}   

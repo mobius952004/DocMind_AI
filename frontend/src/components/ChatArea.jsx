@@ -10,6 +10,10 @@ import {
   Copy,
   Check,
 } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
+import 'highlight.js/styles/github-dark.css';
 
 /**
  * ChatArea – scrollable message history.
@@ -67,7 +71,14 @@ function AssistantMessage({ message }) {
       </div>
       <div className="max-w-[80%] flex flex-col gap-1">
         <div className="px-4 py-3 rounded-2xl rounded-bl-sm glass text-sm text-zinc-100 leading-relaxed shadow-lg whitespace-pre-wrap relative group/msg">
-          {message.content || message.text}
+        <div className="markdown-body">
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeHighlight]}
+        >
+        {message.content || message.text}
+      </ReactMarkdown>
+    </div>
           <button
             onClick={handleCopy}
             className="absolute top-2 right-2 p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-zinc-400 hover:text-zinc-200 opacity-0 group-hover/msg:opacity-100 transition-all duration-150 cursor-pointer"

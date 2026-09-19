@@ -1,16 +1,14 @@
-import Sidebar from '../components/Sidebar';
-import ChatArea from '../components/ChatArea';
-import InputBar from '../components/InputBar';
-import { useChat } from '../context/ChatContext';
+import { useChat } from "../context/ChatContext";
+import Sidebar from "../components/Sidebar";
+import ChatArea from "../components/ChatArea";
+import InputBar from "../components/InputBar";
 
-export default function ChatPage() {
+export function Mock_test() {
   const {
     messages,
-    uploadedFiles,
     sidebarOpen,
     setSidebarOpen,
     isLoading,
-    handleRemoveFile,
     handleSend,
     handlePromptClick
   } = useChat();
@@ -26,12 +24,12 @@ export default function ChatPage() {
       {/* Sidebar drawer */}
       <Sidebar
         isOpen={sidebarOpen}
-        uploadedFiles={uploadedFiles}
-        onRemove={handleRemoveFile}
+        uploadedFiles={[]}
+        onRemove={() => {}}
         onClose={() => setSidebarOpen(false)}
       />
 
-      {/* Chat message area */}
+      {/* Chat message area (Scrollable) */}
       <ChatArea
         messages={messages}
         isLoading={isLoading}
