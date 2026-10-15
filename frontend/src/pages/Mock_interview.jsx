@@ -2,16 +2,13 @@ import { useChat } from "../context/ChatContext";
 import Sidebar from "../components/Sidebar";
 import ChatArea from "../components/ChatArea";
 import InputBar from "../components/InputBar";
+import { useMock } from "../context/MockContext";
+
 
 export function Mock_test() {
-  const {
-    messages,
-    sidebarOpen,
-    setSidebarOpen,
-    isLoading,
-    handleSend,
-    handlePromptClick
-  } = useChat();
+
+  const {mockMessage,isLoading,setLastFeedback,uploadedFiles,handleRemoveFile,handleSend,handlePromptClick}= useMock()
+  const{sidebarOpen,setSidebarOpen}=useChat()
 
   return (
     <div className="flex flex-col flex-1 min-h-0 w-full relative overflow-hidden bg-zinc-950 text-zinc-100">
@@ -24,14 +21,14 @@ export function Mock_test() {
       {/* Sidebar drawer */}
       <Sidebar
         isOpen={sidebarOpen}
-        uploadedFiles={[]}
-        onRemove={() => {}}
+        uploadedFiles={uploadedFiles}
+        onRemove={handleRemoveFile}
         onClose={() => setSidebarOpen(false)}
       />
 
       {/* Chat message area (Scrollable) */}
       <ChatArea
-        messages={messages}
+        messages={mockMessage}
         isLoading={isLoading}
         onPromptClick={handlePromptClick}
       />

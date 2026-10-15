@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   FileText,
   Search,
@@ -9,6 +10,9 @@ import {
   Sparkles,
   Copy,
   Check,
+  Brain,
+  Layers,
+  Code2,
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -28,6 +32,13 @@ const WELCOME_PROMPTS = [
   { icon: Search, label: 'Extract key insights', sub: 'Pull important data points from your files' },
   { icon: HelpCircle, label: 'Ask anything about your docs', sub: 'RAG-powered Q&A over your documents' },
   { icon: PenTool, label: 'Draft a report', sub: 'Generate structured content from your sources' },
+];
+
+const MOCK_PROMPTS = [
+  { icon: Layers, label: 'System Design Interview', sub: 'Distributed architecture, caching, and scalability' },
+  { icon: Code2, label: 'React & Frontend Deep Dive', sub: 'Virtual DOM, state management, and performance' },
+  { icon: Brain, label: 'Python & FastAPI Backend', sub: 'Async IO, concurrency, and REST API design' },
+  { icon: Bot, label: 'AI & LangGraph Architecture', sub: 'Multi-agent workflows, state graphs, and memory' },
 ];
 
 function UserMessage({ message }) {
@@ -71,14 +82,14 @@ function AssistantMessage({ message }) {
       </div>
       <div className="max-w-[80%] flex flex-col gap-1">
         <div className="px-4 py-3 rounded-2xl rounded-bl-sm glass text-sm text-zinc-100 leading-relaxed shadow-lg whitespace-pre-wrap relative group/msg">
-        <div className="markdown-body">
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeHighlight]}
-        >
-        {message.content || message.text}
-      </ReactMarkdown>
-    </div>
+          <div className="markdown-body">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeHighlight]}
+            >
+              {message.content || message.text}
+            </ReactMarkdown>
+          </div>
           <button
             onClick={handleCopy}
             className="absolute top-2 right-2 p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-zinc-400 hover:text-zinc-200 opacity-0 group-hover/msg:opacity-100 transition-all duration-150 cursor-pointer"
@@ -110,6 +121,8 @@ function TypingIndicator() {
 
 export default function ChatArea({ messages = [], isLoading = false, onPromptClick }) {
   const bottomRef = useRef(null);
+  const location = useLocation();
+  const isMockMode = location.pathname.toLowerCase().includes('mock');
 
   // Auto-scroll to latest message
   useEffect(() => {
@@ -117,6 +130,7 @@ export default function ChatArea({ messages = [], isLoading = false, onPromptCli
   }, [messages, isLoading]);
 
   const isEmpty = messages.length === 0;
+  const prompts = isMockMode ? MOCK_PROMPTS : WELCOME_PROMPTS;
 
   return (
     <div className="flex-1 overflow-y-auto px-4 py-6">
@@ -127,33 +141,44 @@ export default function ChatArea({ messages = [], isLoading = false, onPromptCli
           <div className="flex flex-col items-center justify-center min-h-[60vh] gap-8">
             {/* Hero */}
             <div className="text-center space-y-3">
-              <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-green-500 via-greene-500 to-balck-200 flex items-center justify-center shadow-2xl shadow-green-500/40">
-                <Sparkles className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-zinc-900 flex items-center justify-center shadow-2xl shadow-emerald-500/30 border border-emerald-500/20">
+                {isMockMode ? (
+                  <Brain className="w-8 h-8 text-white" />
+                ) : (
+                  <Sparkles className="w-8 h-8 text-white" />
+                )}
               </div>
-              <h1 className="text-3xl font-bold gradient-text">DocMind AI</h1>
-              <p className="text-slate-400 text-sm max-w-sm mx-auto leading-relaxed">
-                Upload your documents and ask anything. Powered by Retrieval-Augmented Generation.
+              <h1 className="text-3xl font-bold gradient-text">
+                {isMockMode ? 'AI Mock Interview' : 'DocMind AI'}
+              </h1>
+              <p className="text-zinc-400 text-sm max-w-sm mx-auto leading-relaxed">
+                {isMockMode
+                  ? 'Select a topic below or type your target role to begin an adaptive technical interview session.'
+                  : 'Upload your documents and ask anything. Powered by Retrieval-Augmented Generation.'}
               </p>
             </div>
 
             {/* Suggestion cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-lg">
-              {WELCOME_PROMPTS.map((p, i) => {
+              {prompts.map((p, i) => {
                 const IconComp = p.icon;
                 return (
                   <button
                     key={i}
                     onClick={() => onPromptClick?.(p.label)}
-                    className="text-left p-4 rounded-2xl glass border border-white/[0.07] hover:border-indigo-500/30 hover:bg-indigo-500/5 transition-all duration-200 group cursor-pointer"
+                    className="text-left p-4 rounded-2xl glass border border-white/[0.07] hover:border-emerald-500/30 hover:bg-emerald-500/5 transition-all duration-200 group cursor-pointer"
                   >
-                    <IconComp className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform" />
-                    <p className="mt-2 text-sm font-medium text-slate-200 group-hover:text-green-300 transition-colors">{p.label}</p>
-                    <p className="mt-0.5 text-xs text-slate-600">{p.sub}</p>
+                    <IconComp className="w-6 h-6 text-emerald-400 group-hover:scale-110 transition-transform" />
+                    <p className="mt-2 text-sm font-medium text-zinc-200 group-hover:text-emerald-300 transition-colors">
+                      {p.label}
+                    </p>
+                    <p className="mt-0.5 text-xs text-zinc-500">{p.sub}</p>
                   </button>
                 );
               })}
             </div>
           </div>
+
         ) : (
           /* ── Conversation thread ── */
           <div className="space-y-6">

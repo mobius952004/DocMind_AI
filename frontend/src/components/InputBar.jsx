@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
-import { Paperclip, Send, X, Loader2 } from 'lucide-react';
+import { Paperclip, Send, X, Loader2,FileText } from 'lucide-react';
+import{useLocation} from "react-router-dom"
 
 /**
  * InputBar – sticky bottom bar with text input + file upload.
@@ -12,6 +13,8 @@ import { Paperclip, Send, X, Loader2 } from 'lucide-react';
 const ACCEPTED_TYPES = '.pdf,.doc,.docx,.txt,.md,.jpg,.jpeg,.png,.gif,.webp,.odt';
 
 export default function InputBar({ onSend, onFilesAdded, disabled = false }) {
+  const location = useLocation();
+  const isMock = location.pathname.toLowerCase().includes('mock');
   const [text, setText] = useState('');
   const [pendingFiles, setPendingFiles] = useState([]); // Array of File objects
   const [dragOver, setDragOver] = useState(false);
@@ -129,14 +132,20 @@ export default function InputBar({ onSend, onFilesAdded, disabled = false }) {
             onKeyDown={handleKeyDown}
             disabled={disabled}
             rows={1}
-            placeholder="Ask anything about your documents… (Enter to send, Shift+Enter for new line)"
+            placeholder={
+              isMock
+                ? 'Type your interview response or target role/topic… (Enter to send, Shift+Enter for new line)'
+                : 'Ask anything about your documents… (Enter to send, Shift+Enter for new line)'
+            }
             className="w-full bg-transparent text-sm text-slate-200 placeholder:text-slate-600 resize-none outline-none px-4 pt-4 pb-2 leading-relaxed disabled:opacity-50"
             style={{ maxHeight: '160px', overflowY: 'auto' }}
           />
 
           {/* Bottom toolbar */}
+
           <div className="flex items-center justify-between px-3 pb-3 pt-1">
             {/* Left: attach + drag hint */}
+          {location.pathname=="/" && (
             <div className="flex items-center gap-2">
               <input
                 ref={fileInputRef}
@@ -158,7 +167,30 @@ export default function InputBar({ onSend, onFilesAdded, disabled = false }) {
                 <span className="hidden sm:inline font-medium">Attach</span>
               </button>
               <span className="hidden sm:block text-[10px] text-slate-600">PDF · Image · Doc</span>
-            </div>
+            </div>)}
+            {location.pathname=="/Mock"&&(
+            <div className="flex items-center gap-2">
+              {/* <input
+                ref={fileInputRef}
+                type="file"
+                multiple
+                accept={ACCEPTED_TYPES}
+                onChange={handleFileChange}
+                className="hidden"
+                id="file-upload-input"
+              />
+              <button
+                id="attach-file-btn"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={disabled}
+                className="flex items-center gap-1.5 text-slate-400 hover:text-green-300 transition-colors duration-200 text-xs py-1.5 px-2.5 rounded-xl hover:bg-white/5 disabled:opacity-40 cursor-pointer"
+                title="Upload Resume"
+              >
+                <FileText className="w-4 h-4" />
+                <span className="hidden sm:inline font-medium">Upload Resume</span>
+              </button> */}
+            </div>)
+}
 
             {/* Right: character count + send */}
             <div className="flex items-center gap-3">

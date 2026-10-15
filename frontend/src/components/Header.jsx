@@ -5,7 +5,7 @@ export default function Header({ onToggleSidebar, sidebarOpen, user, onLogout })
   const location = useLocation();
 
   return (
-    <header className="glass flex fixed items-center justify-between px-5 py-3 z-30 border-b border-white/[0.06] shrink-0 w-full bg-zinc-950/80 backdrop-blur-md">
+    <header className="glass flex fixed top-0 left-0 right-0 h-16 items-center justify-between px-5 py-3 z-30 border-b border-white/[0.06] shrink-0 w-full bg-zinc-950/80 backdrop-blur-md">
       {/* Left – sidebar toggle + brand */}
       <div className="flex items-center gap-3">
         <button
@@ -37,22 +37,20 @@ export default function Header({ onToggleSidebar, sidebarOpen, user, onLogout })
       <div className="flex items-center gap-1.5 bg-zinc-900/80 p-1 rounded-xl border border-white/10">
         <Link
           to="/"
-          className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
-            location.pathname === '/'
+          className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${location.pathname === '/'
               ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shadow-sm'
               : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'
-          }`}
+            }`}
         >
           <MessageSquare className="w-3.5 h-3.5" />
           <span>Chat Mode</span>
         </Link>
         <Link
           to="/Mock"
-          className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
-            location.pathname === '/Mock'
+          className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${location.pathname === '/Mock'
               ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shadow-sm'
               : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'
-          }`}
+            }`}
         >
           <Target className="w-3.5 h-3.5" />
           <span>Mock Mode</span>

@@ -17,7 +17,6 @@ export function ChatProvider({ children }) {
       return [];
     }
   });
-
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -169,7 +168,8 @@ export function ChatProvider({ children }) {
         setUploadedFiles,
         setIsLoading,
         clearChat,
-        handlePromptClick
+        handlePromptClick,
+
       }}
     >
       {children}

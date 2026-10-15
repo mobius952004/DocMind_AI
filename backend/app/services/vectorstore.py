@@ -11,7 +11,7 @@ class VectorStoreService:
             persist_directory="chroma_db"
         )
 
-    def add_documents(self, chunks, batch_size=32):
+    def add_documents(self, chunks, batch_size=32): 
         if not chunks:
             return
         # Batch document embedding to prevent context/memory limits

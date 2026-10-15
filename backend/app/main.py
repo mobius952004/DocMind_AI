@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from app.api.uploads import router as upload_router
 from app.api.interview import router as interview_router
+from app.api.mock_interview import router as mock_router
 from app import config
 from fastapi.middleware.cors import CORSMiddleware
 import traceback
@@ -50,6 +51,11 @@ app.include_router(
     interview_router,
     prefix="/interview",
     tags=["Interview"]
+)
+app.include_router(
+    mock_router,
+    prefix="/interview",
+    tags=["Mock_Interview"]
 )
 
 @app.get("/")

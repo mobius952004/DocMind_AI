@@ -23,7 +23,6 @@ from .QA_agent import QA_agent
 from .Search_agent import Search_agent
 from .explain_agent import explain_agent
 
-
 class AgentInput(TypedDict):
     """Simple input state for each subagent."""
     query: str
@@ -37,7 +36,7 @@ class AgentOutput(TypedDict):
 
 class Classification(TypedDict):
     """A single routing decision: which agent to call with what query."""
-    source: Literal["QA_agent", "web_search","explain_agent"]
+    source: Literal["QA_agent", "web_search","explain_agent",]
     query: str
 
 
@@ -72,6 +71,7 @@ Available sources:
 - QA_agent : use RAG knowledge base for user-uploaded documents and textbooks.
 - web_search : search the live web for general interview topics, latest framework questions, and programming patterns.
 - explain_agent : use for explaning the concepts and topics in brief and in a way that interviewer can ask follow up questions
+- mock_agent : use for generating mock interview questions for a specific job role and company name and concepts , user will respond to the questions and llm will give feedback on the response based on the concepts and job role and company name, this cycle will continue untill  the user says stop 
 
 Return ONLY the sources that are relevant to the query. If unspecified or general, prefer web_search or both."""
         },
